@@ -637,7 +637,36 @@ dfQPPS5['sumTFIDFBodyFrequency'] = dfQPPS5.apply(lambda x : x['sumTFIDFBody']/(x
 #Attention très gourmand en mémoire. !!!!!!!!!!!!!!!
 dfQPPS5.to_json("dfQPPS6.json")  # sauvegarde en flat file json
 #ce dernier fichier dfQPPS6.json sera utilisé pour le machine Learning.
+
+
+#Sauvegarde dans un format plus léger qui sera utilisé pour le machine Learning.
 #dans un prochain article.
+#on ne sauvegarde que les variables qui nous intéresseront  par la suite
+#Relecture pour continuer ############
+dfQPPS6 = pd.read_json("dfQPPS6.json")
+dfQPPS6.info(verbose=True) # 12194  enregistrements.    
+dfQPPS6.reset_index(inplace=True, drop=True) 
+
+dfQPPS7 =  dfQPPS6[['query', 'page', 'position', 'group','isHttps', 'level', 
+             'lenWebSite', 'lenTokensWebSite',  'lenTokensQueryInWebSiteFrequency',  'sumTFIDFWebSiteFrequency',            
+             'lenPath', 'lenTokensPath',  'lenTokensQueryInPathFrequency' , 'sumTFIDFPathFrequency',  
+              'lenTitle', 'lenTokensTitle', 'lenTokensQueryInTitleFrequency', 'sumTFIDFTitleFrequency',
+              'lenDescription', 'lenTokensDescription', 'lenTokensQueryInDescriptionFrequency', 'sumTFIDFDescriptionFrequency',
+              'lenH1', 'lenTokensH1', 'lenTokensQueryInH1Frequency' ,  'sumTFIDFH1Frequency',        
+              'lenH2', 'lenTokensH2',  'lenTokensQueryInH2Frequency' ,  'sumTFIDFH2Frequency',          
+              'lenH3', 'lenTokensH3', 'lenTokensQueryInH3Frequency' , 'sumTFIDFH3Frequency',
+              'lenH4',  'lenTokensH4','lenTokensQueryInH4Frequency', 'sumTFIDFH4Frequency', 
+              'lenH5', 'lenTokensH5', 'lenTokensQueryInH5Frequency', 'sumTFIDFH5Frequency', 
+              'lenH6', 'lenTokensH6', 'lenTokensQueryInH6Frequency', 'sumTFIDFH6Frequency', 
+              'lenB', 'lenTokensB', 'lenTokensQueryInBFrequency', 'sumTFIDFBFrequency', 
+              'lenEM', 'lenTokensEM', 'lenTokensQueryInEMFrequency', 'sumTFIDFEMFrequency', 
+              'lenStrong', 'lenTokensStrong', 'lenTokensQueryInStrongFrequency', 'sumTFIDFStrongFrequency', 
+              'lenBody', 'lenTokensBody', 'lenTokensQueryInBodyFrequency', 'sumTFIDFBodyFrequency', 
+              'elapsedTime', 'nbrInternalLinks', 'nbrExternalLinks' ]] 
+
+dfQPPS7.to_csv("dfQPPS7.csv", sep=",", encoding='utf-8', index=False) 
+dfQPPS7FR.to_csv("dfQPPS7FR.csv", sep=";", encoding='utf-8', index=False) #séparateur ; 
+
 
 ##########################################################################
 # MERCI pour votre attention !
